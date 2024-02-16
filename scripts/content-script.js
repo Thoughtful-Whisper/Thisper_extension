@@ -1,5 +1,5 @@
-document.addEventListener("keyup", function (e) {
-  if (e.keyCode === 82) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.action === "changeColor") {
     let comments = document.querySelectorAll("ytd-comment-renderer");
 
     comments.forEach((comment) => {
