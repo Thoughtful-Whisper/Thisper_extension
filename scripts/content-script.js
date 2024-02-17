@@ -1,4 +1,4 @@
-const userNames = ["@svt-jo4df", "@user-fn6lq5qs6z"];
+const userNames = ["@sup_622", "@codec1012"];
 
 function changeColor() {
   let comments = document.querySelectorAll("ytd-comment-renderer");
