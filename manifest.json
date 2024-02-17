@@ -2,6 +2,12 @@
   "manifest_version": 3,
   "name": "Thisper",
   "version": "1.0",
+  "icons": {
+    "16": "img/thisperIcon.png",
+    "32": "img/thisperIcon.png",
+    "48": "img/thisperIcon.png",
+    "128": "img/thisperIcon.png"
+  },
   "action": {
     "default_popup": "popup/popup.html"
   },
