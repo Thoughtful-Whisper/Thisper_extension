@@ -52,14 +52,15 @@ document.addEventListener("keydown", function (e) {
     // 댓글 목록의 부모 요소를 찾기
     let parent = comments[0].parentNode;
 
-    // 댓글 목록의 부모 요소의 모든 자식 노드를 삭제
-    while (parent.firstChild) {
-      parent.firstChild.remove();
-    }
+    // 댓글 요소의 display 속성을 조작하여 숨기기
+    comments.forEach(function (comment) {
+      comment.style.display = "none";
+    });
 
-    // 정렬된 댓글 요소를 부모 요소에 다시 추가
+    // 정렬된 댓글 요소를 부모 요소에 다시 추가하고, display 속성을 조작하여 보이기
     comments.forEach(function (comment) {
       parent.appendChild(comment);
+      comment.style.display = "";
     });
   }
 });
