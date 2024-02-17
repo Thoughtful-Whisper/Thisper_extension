@@ -1,3 +1,5 @@
+const userNames = ["@svt-jo4df", "@user-fn6lq5qs6z"];
+
 function changeColor() {
   let comments = document.querySelectorAll("ytd-comment-renderer");
 
@@ -7,7 +9,7 @@ function changeColor() {
     if (userNameElement) {
       let userName = userNameElement.textContent.trim();
 
-      if (userName === "") {
+      if (userNames.includes(userName)) {
         comment.style.backgroundColor = "#FFD600";
       }
     }
@@ -23,7 +25,7 @@ function resetColor() {
     if (userNameElement) {
       let userName = userNameElement.textContent.trim();
 
-      if (userName === "") {
+      if (userNames.includes(userName)) {
         comment.style.backgroundColor = "";
       }
     }
