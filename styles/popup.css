@@ -63,7 +63,7 @@ button {
   width: 300px;
   height: 50px;
   left: 80px;
-  top: 455px;
+  top: 490px;
   position: absolute;
   background: #323949;
   border-radius: 7px;
@@ -79,7 +79,7 @@ button {
   width: 50px;
   height: 50px;
   left: 20px;
-  top: 455px;
+  top: 490px;
   position: absolute;
   background: #cbd1dc;
   border-radius: 7px;
@@ -105,6 +105,6 @@ button {
   width: 269px;
   height: 236px;
   left: 70px;
-  top: 170px;
+  top: 180px;
   position: absolute;
 }

@@ -4,17 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../styles/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <div id="header">
-        <button id="back-button">뒤로가기</button>
+        <button id="back-button"><i class="fa-solid fa-arrow-left-long"></i></button>
         Thisper
+        <button id="help-button"><i class="fa-solid fa-question"></i></button>
     </div>
     <div id="chat-space"><!--채팅 공간--></div>
     <div id="footer">
-        <input id="input-text" type="text" placeholder="메시지를 입력하세요">
-        <button id="send-button">전송</button>
+        <textarea id="input-text" type="text" placeholder="ask to Thisper"></textarea>
+        <button id="send-button">ASK</button>
     </div>
 </body>
 <script src="chatbot.js"></script>
