@@ -3,59 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pragati+Narrow&display=swap');
-
-        .loader {
-            border: 2px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 2px solid #323949;
-            width: 24px;
-            height: 24px;
-            animation: spin 2s linear infinite;
-            position: absolute;
-            top: calc(50% - 14px);
-            left: calc(50% - 14px);
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        button {
-            font-family: 'Pragati Narrow', sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../styles/popup.css">
 </head>
 
 <body>
     <div style="width: 400px; height: 550px; position: relative; background: white">
-        <div
-            style="width: 400px; height: 50px; left: 0px; top: 0px; position: absolute; border-bottom: 1px #ACACAC solid">
+        <div id="top-border"></div>
+        <div id="title">
+            <span id="bold-title">Thipser</span>
+            <span id="normal-title">: Thoughtful Whisper</span>
         </div>
-        <div style="width: 379px; height: 50px; left: 6px; top: 5px; position: absolute"><span
-                style="color: black; font-size: 20px; font-family: Pragati Narrow; font-weight: 700; word-wrap: break-word">Thipser
-            </span><span
-                style="color: black; font-size: 20px; font-family: Pragati Narrow; font-weight: 400; word-wrap: break-word">:
-                Thoughtful Whisper</span></div>
-        <button id="whisper-button"
-            style="width: 300px; height: 50px; left: 80px; top: 455px; position: absolute; background: #323949; border-radius: 7px; color: white; font-size: 18px; font-family: Pragati Narrow; font-weight: 700; word-wrap: break-word; text-align: center;">do
-            whisper</button>
-        <button id="loader-button"
-            style="width: 50px; height: 50px; left: 20px; top: 455px; position: absolute; background: #CBD1DC; border-radius: 7px; border: none; position: relative;">
+        <button id="whisper-button">do whisper</button>
+        <button id="loader-button">
             <div class="loader"></div>
         </button>
-        <div
-            style="width: 371px; height: 31px; left: 14px; top: 88px; position: absolute; text-align: center; color: #000000; font-size: 16px; font-family: Pragati Narrow; font-weight: 400; word-wrap: break-word">
-            Thisper visualizes comments to mitigate polarization and provides awareness against bias.</div>
-        <img style="width: 269px; height: 236px; left: 70px; top: 170px; position: absolute"
-            src="../img/Group 311.png" />
+        <div id="description">
+            Thisper visualizes comments to mitigate polarization and provides awareness against bias.
+        </div>
+        <img id="image" src="../img/Group 311.png" />
     </div>
 </body>
 <script src="popup.js"></script>
