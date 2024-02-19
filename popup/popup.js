@@ -49,3 +49,9 @@ document.getElementById("loader-button").addEventListener("click", function () {
     });
   });
 });
+
+window.onload = function () {
+  document.querySelector("img").addEventListener("click", function () {
+    window.location.href = chrome.runtime.getURL("../chatbot/chatbot.html");
+  });
+};
