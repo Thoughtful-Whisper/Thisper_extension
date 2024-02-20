@@ -42,19 +42,64 @@ function resetColors() {
   });
 }
 
-// whisper-button 클릭 이벤트에 핸들러 연결
+//말풍선 이미지 변경
+let image1 = document.getElementById("image1");
+let image2 = document.getElementById("image2");
+let image3 = document.getElementById("image3");
+let image4 = document.getElementById("image4");
+let image5 = document.getElementById("image5");
+let image6 = document.getElementById("image6");
+let image7 = document.getElementById("image7");
+
+let images = [null, image1, image2, image3, image4, image5, image6, image7];
+let index = 0;
+let isError = false;
+let isWaiting = false;
+let intervalId;
+
+function rotateImages() {
+  // 모든 이미지를 none
+  image1.style.display = "none";
+  image2.style.display = "none";
+  image3.style.display = "none";
+  image4.style.display = "none";
+  image5.style.display = "none";
+  image6.style.display = "none";
+  image7.style.display = "none";
+
+  if (isError) {
+    if (index === 3) {
+      image3.style.display = "block";
+    } else if (index === 4) {
+      image4.style.display = "block";
+    }
+    isError = false;
+    index = 0;
+  } else if (isWaiting) {
+    image5.style.display = "block";
+  } else if (index === 6) {
+    image6.style.display = "block";
+    index = 0;
+  } else if (index === 7) {
+    image7.style.display = "block";
+    index = 0;
+  } else {
+    if (images[index]) images[index].style.display = "block";
+    index = (index + 1) % 3;
+  }
+}
+intervalId = setInterval(rotateImages, 3000);
+
 document
   .getElementById("whisper-button")
   .addEventListener("click", function () {
-    // 현재 활성화된 탭 정보 가져오기
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const youtubeLink = tabs[0].url; // 현재 페이지의 URL 가져오기
+      const youtubeLink = tabs[0].url;
 
-      // 버튼 텍스트를 'Waiting for response'로 변경
       document.getElementById("whisper-button").innerHTML =
         "Waiting for response<div class='loader'></div>";
-      // 로딩 아이콘 보이기
       document.querySelector(".loader").style.display = "block";
+      isWaiting = true;
 
       fetch("http://34.64.207.91:8080/connect/", {
         method: "POST",
@@ -64,11 +109,28 @@ document
         body: JSON.stringify({ link: youtubeLink }),
       })
         .then((response) => {
-          // 응답이 도착하면 버튼 텍스트를 'Do whisper'로 변경
           document.getElementById("whisper-button").innerHTML =
             "Do whisper<div class='loader'></div>";
-          // 로딩 아이콘 숨기기
           document.querySelector(".loader").style.display = "none";
+          isWaiting = false; // 'Waiting for response' 상태가 끝난 후에 isWaiting을 false로 설정
+          index = 6; // 'Waiting for response' 상태가 끝난 후에 index를 6으로 설정
+          rotateImages();
+
+          setTimeout(() => {
+            // 일정 시간 후에 index를 0으로 설정
+            index = 0;
+            rotateImages();
+          }, 5000);
+
+          if (
+            !response.ok ||
+            response.headers.get("Content-Type") !== "application/json"
+          ) {
+            return response.text().then((text) => {
+              throw new Error(text);
+            });
+          }
+
           return response.json();
         })
         .then((data) => {
@@ -86,22 +148,31 @@ document
             });
           } else {
             console.log("The response.data is not an array.");
+            isError = true;
+            index = 3;
+            rotateImages();
           }
         })
         .catch((error) => {
-          // 에러가 발생하면 버튼 텍스트를 'Do whisper'로 변경
           document.getElementById("whisper-button").innerHTML =
             "Do whisper<div class='loader'></div>";
-          // 로딩 아이콘 숨기기
           document.querySelector(".loader").style.display = "none";
           console.error("Error:", error);
+
+          if (error.message.includes("Field required")) {
+            isError = true;
+            index = 4;
+            rotateImages();
+          }
         });
     });
   });
 
-// loader-button 클릭 이벤트에 핸들러 연결
+// reset-button 클릭 이벤트에 핸들러 연결
 document.getElementById("reset-button").addEventListener("click", function () {
   resetColors();
+  index = 7;
+  rotateImages();
 });
 
 // 페이지가 로드되면 이미지 클릭 이벤트에 핸들러 연결
@@ -111,20 +182,3 @@ window.onload = function () {
     window.location.href = chrome.runtime.getURL("../chatbot/chatbot.html");
   });
 };
-
-//말풍선 이미지 변경
-let image1 = document.getElementById("image1");
-let image2 = document.getElementById("image2");
-
-let images = [null, image1, image2];
-let index = 0;
-
-setInterval(function () {
-  image1.style.display = "none";
-  image2.style.display = "none";
-  if (images[index % images.length]) {
-    images[index % images.length].style.display = "block"; // 해당 순서의 이미지만 보여줍니다
-  }
-
-  index++;
-}, 3000); // 3000ms = 3초
