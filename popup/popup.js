@@ -111,3 +111,20 @@ window.onload = function () {
     window.location.href = chrome.runtime.getURL("../chatbot/chatbot.html");
   });
 };
+
+//말풍선 이미지 변경
+let image1 = document.getElementById("image1");
+let image2 = document.getElementById("image2");
+
+let images = [null, image1, image2];
+let index = 0;
+
+setInterval(function () {
+  image1.style.display = "none";
+  image2.style.display = "none";
+  if (images[index % images.length]) {
+    images[index % images.length].style.display = "block"; // 해당 순서의 이미지만 보여줍니다
+  }
+
+  index++;
+}, 3000); // 3000ms = 3초
