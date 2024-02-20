@@ -26,8 +26,23 @@ function handleButton(userNames, color) {
   });
 }
 
+// 초기화 함수 정의
+function resetColors() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.scripting.executeScript({
+      target: { tabId: tabs[0].id },
+      function: function () {
+        let comments = document.querySelectorAll("ytd-comment-renderer");
+        // 모든 댓글의 배경색을 초기화
+        comments.forEach((comment) => {
+          comment.style.backgroundColor = "white";
+        });
+      },
+    });
+  });
+}
+
 // whisper-button 클릭 이벤트에 핸들러 연결
-// 사용자가 'do whisper' 버튼을 클릭하면, 크롤링을 요청하고, 크롤링 결과를 바탕으로 댓글의 온도(?)를 판단하여 색상을 결정
 document
   .getElementById("whisper-button")
   .addEventListener("click", function () {
@@ -43,7 +58,23 @@ document
         body: JSON.stringify({ link: youtubeLink }),
       })
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+          console.log(data);
+          if (Array.isArray(data.data)) {
+            data.data.forEach((item) => {
+              if (item.color != null) {
+                handleButton([item.author], item.color);
+              } else {
+                console.error(
+                  "Color is null or undefined for author",
+                  item.author
+                );
+              }
+            });
+          } else {
+            console.log("The response.data is not an array.");
+          }
+        })
         .catch((error) => {
           console.error("Error:", error);
         });
@@ -51,9 +82,8 @@ document
   });
 
 // loader-button 클릭 이벤트에 핸들러 연결
-// 클릭하면 배경색을 초기화
 document.getElementById("loader-button").addEventListener("click", function () {
-  handleButton("red");
+  resetColors();
 });
 
 // 페이지가 로드되면 이미지 클릭 이벤트에 핸들러 연결

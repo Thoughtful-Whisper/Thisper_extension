@@ -11,11 +11,11 @@
   "action": {
     "default_popup": "popup/popup.html"
   },
-  "permissions": ["scripting", "http://34.64.207.91:8080/*"],
+  "permissions": ["scripting"],
   "host_permissions": [
     "https://*.youtube.com/*",
     "http://localhost:3000/",
-    "http://34.64.207.91:8080/*"
+    "http://34.64.207.91:8080/"
   ],
   "content_scripts": [
     {
