@@ -50,6 +50,12 @@ document
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       const youtubeLink = tabs[0].url; // 현재 페이지의 URL 가져오기
 
+      // 버튼 텍스트를 'Waiting for response'로 변경
+      document.getElementById("whisper-button").innerHTML =
+        "Waiting for response<div class='loader'></div>";
+      // 로딩 아이콘 보이기
+      document.querySelector(".loader").style.display = "block";
+
       fetch("http://34.64.207.91:8080/connect/", {
         method: "POST",
         headers: {
@@ -57,7 +63,14 @@ document
         },
         body: JSON.stringify({ link: youtubeLink }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          // 응답이 도착하면 버튼 텍스트를 'Do whisper'로 변경
+          document.getElementById("whisper-button").innerHTML =
+            "Do whisper<div class='loader'></div>";
+          // 로딩 아이콘 숨기기
+          document.querySelector(".loader").style.display = "none";
+          return response.json();
+        })
         .then((data) => {
           console.log(data);
           if (Array.isArray(data.data)) {
@@ -76,13 +89,18 @@ document
           }
         })
         .catch((error) => {
+          // 에러가 발생하면 버튼 텍스트를 'Do whisper'로 변경
+          document.getElementById("whisper-button").innerHTML =
+            "Do whisper<div class='loader'></div>";
+          // 로딩 아이콘 숨기기
+          document.querySelector(".loader").style.display = "none";
           console.error("Error:", error);
         });
     });
   });
 
 // loader-button 클릭 이벤트에 핸들러 연결
-document.getElementById("loader-button").addEventListener("click", function () {
+document.getElementById("reset-button").addEventListener("click", function () {
   resetColors();
 });
 
