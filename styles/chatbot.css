@@ -128,7 +128,7 @@ body {
   top: 10px;
   right: 5px;
   width: 80%;
-  height: 50%;
+  height: 90%;
   background: white;
   border: 1px solid rgb(210, 210, 210);
   padding: 10px;
@@ -140,12 +140,25 @@ body {
 
 #close-button {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 10px;
   background: transparent;
   border: none;
   font-size: 15px;
 }
+#textbox {
+  margin-top: 30px;
+  border-bottom: solid 1px #acacac;
+}
 #popup p {
-  margin-top: 30px; /* 버튼과 텍스트 사이에 간격 추가 */
+  margin-bottom: 10px; /* 버튼과 텍스트 사이에 간격 추가 */
+}
+
+#intro {
+  font-weight: bold;
+}
+
+#aware {
+  font-weight: bold;
+  color: red;
 }
