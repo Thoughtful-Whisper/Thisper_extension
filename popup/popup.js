@@ -33,30 +33,17 @@ document
   .addEventListener("click", function () {
     // 현재 활성화된 탭 정보 가져오기
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const currentUrl = tabs[0].url; // 현재 페이지의 URL 가져오기
+      const youtubeLink = tabs[0].url; // 현재 페이지의 URL 가져오기
 
-      const apiUrl = "http://localhost:3000/comments";
-
-      // 크롤링을 시작하라는 요청을 API에 전송
-      // 요청 본문에 현재 페이지의 URL 추가
-      fetch(apiUrl, {
+      fetch("http://34.64.207.91:8080/connect/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ startCrawling: true, url: currentUrl }),
+        body: JSON.stringify({ link: youtubeLink }),
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          data.users.forEach((item) => {
-            const userNames = [item.id];
-            const color = item.color;
-            handleButton(userNames, color);
-          });
-        })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
         .catch((error) => {
           console.error("Error:", error);
         });

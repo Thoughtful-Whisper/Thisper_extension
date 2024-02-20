@@ -3,13 +3,25 @@ window.onload = function () {
   document.getElementById("back-button").addEventListener("click", function () {
     window.location.href = chrome.runtime.getURL("../popup/popup.html");
   });
+
+  document.getElementById("help-button").onclick = function () {
+    document.getElementById("popup").classList.remove("hidden");
+  };
+
+  document.getElementById("close-button").onclick = function () {
+    document.getElementById("popup").classList.add("hidden");
+  };
+
+  window.onclick = function (event) {
+    if (
+      event.target !== document.getElementById("popup") &&
+      event.target !== document.getElementById("help-button")
+    ) {
+      document.getElementById("popup").classList.add("hidden");
+    }
+  };
 };
 var inputText = document.getElementById("input-text");
-
-inputText.addEventListener("input", function () {
-  this.style.height = "auto";
-  this.style.height = this.scrollHeight + "px";
-});
 
 inputText.addEventListener("keydown", function (event) {
   if (event.key == "Enter" && !event.shiftKey) {
@@ -47,6 +59,5 @@ document.getElementById("send-button").addEventListener("click", function () {
     }, 500);
 
     inputText.value = "";
-    inputText.style.height = "auto";
   }
 });

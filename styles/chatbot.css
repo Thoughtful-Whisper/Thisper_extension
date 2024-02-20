@@ -17,7 +17,7 @@ body {
   font-family: "Pragati Narrow", sans-serif;
   font-size: 25px;
   font-weight: bold;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: solid 1px #acacac;
 }
 
@@ -93,25 +93,21 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border-top: solid 1px #efefef;
 }
 
 #footer #input-text {
-  width: 75%;
+  width: 80%;
   border: 2px solid #323949;
   border-radius: 1em;
   height: 3em;
   padding-left: 1em;
   color: #acacac;
-
-  resize: none; /* 유저가 직접 크기를 조절하지 못하게 합니다. */
-  overflow: auto; /* 텍스트가 박스를 꽉 채우면 자동으로 아래로 넘어가게 합니다. */
-  white-space: pre-wrap;
+  margin-right: 2%;
 }
 
 #footer #send-button {
   display: flex;
-  width: 17%;
+  width: 18%;
   height: 3em;
   padding: 1.5em;
   border-radius: 1em;
@@ -122,4 +118,31 @@ body {
   text-align: center;
   justify-content: center;
   align-items: center;
+}
+
+#popup {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  width: 80%;
+  height: 50%;
+  background: white;
+  border: 1px solid rgb(210, 210, 210);
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+#close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+}
+#popup p {
+  margin-top: 30px; /* 버튼과 텍스트 사이에 간격 추가 */
 }
