@@ -74,7 +74,7 @@ body {
   max-width: 90%;
   word-wrap: break-word;
   padding: 10px;
-  border-radius: 0px;
+  border-radius: 10px;
 }
 
 .user-message {
