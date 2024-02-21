@@ -43,6 +43,7 @@ function resetColors() {
 }
 
 //말풍선 이미지 변경
+let image0 = document.getElementById("image0");
 let image1 = document.getElementById("image1");
 let image2 = document.getElementById("image2");
 let image3 = document.getElementById("image3");
@@ -51,7 +52,18 @@ let image5 = document.getElementById("image5");
 let image6 = document.getElementById("image6");
 let image7 = document.getElementById("image7");
 
-let images = [null, image1, image2, image3, image4, image5, image6, image7];
+let images = [
+  null,
+
+  image1,
+  image0,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+];
 let index = 0;
 let isError = false;
 let isWaiting = false;
@@ -59,6 +71,7 @@ let intervalId;
 
 function rotateImages() {
   // 모든 이미지를 none
+  image0.style.display = "none";
   image1.style.display = "none";
   image2.style.display = "none";
   image3.style.display = "none";
@@ -85,7 +98,7 @@ function rotateImages() {
     index = 0;
   } else {
     if (images[index]) images[index].style.display = "block";
-    index = (index + 1) % 3;
+    index = (index + 1) % 4;
   }
 }
 intervalId = setInterval(rotateImages, 3000);

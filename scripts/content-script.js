@@ -15,7 +15,6 @@ function handleComment(color) {
     }
   });
 }
-changeColor();
 
 /*
 // 댓글을 좋아요 수에 따라 정렬하는 함수

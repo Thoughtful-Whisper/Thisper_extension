@@ -133,7 +133,7 @@ button {
 #reset-button:hover {
   background-color: #ff4444;
 }
-
+#image0,
 #image2,
 #image3 {
   width: 70%; /* 이미지 너비를 절반으로 조절합니다. */
